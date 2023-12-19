@@ -10,7 +10,32 @@ import (
 	adventofcode "stevenwmerrill.com/adventofcode/2023/v2"
 )
 
-func GetPossibleGames(input string) (int, error) {
+func GetPowerOfMinCubes(input string) (int, error) {
+	var output int
+	lines := strings.Split(input, "\n")
+	for _, line := range lines {
+		gameResult, err := ParseLine(line)
+		if err != nil {
+			return 0, err
+		}
+		minCubeCounts := &CubeCounts{}
+		for _, cubeCount := range gameResult.CubeCounts {
+			if cubeCount.Red > minCubeCounts.Red {
+				minCubeCounts.Red = cubeCount.Red
+			}
+			if cubeCount.Green > minCubeCounts.Green {
+				minCubeCounts.Green = cubeCount.Green
+			}
+			if cubeCount.Blue > minCubeCounts.Blue {
+				minCubeCounts.Blue = cubeCount.Blue
+			}
+		}
+		output += minCubeCounts.Red * minCubeCounts.Green * minCubeCounts.Blue
+	}
+	return output, nil
+}
+
+func GetPossibleGameIdSums(input string) (int, error) {
 	var output int
 	lines := strings.Split(input, "\n")
 OUTER:
@@ -39,8 +64,6 @@ type CubeCounts struct {
 	Green int
 	Blue  int
 }
-
-type ParseLineFunc func(line string) GameResult
 
 func ParseLine(line string) (GameResult, error) {
 	var err error
@@ -95,14 +118,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error reading file: %v", err)
 	}
-	sum1, err := GetPossibleGames(input)
+	sum1, err := GetPossibleGameIdSums(input)
 	if err != nil {
 		log.Fatalf("Error getting possible games: %v", err)
 	}
-	// sum2, err := GetCalibrationsScanner(input, ScanNumeralsAndNumberWords)
-	// if err != nil {
-	// 	log.Fatalf("Error getting calibrations: %v", err)
-	// }
-	// fmt.Println(sum1, sum2)
-	fmt.Println(sum1)
+	sum2, err := GetPowerOfMinCubes(input)
+	if err != nil {
+		log.Fatalf("Error getting calibrations: %v", err)
+	}
+	fmt.Println(sum1, sum2)
 }

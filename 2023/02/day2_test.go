@@ -12,13 +12,22 @@ Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`
 
 func TestGamesPossible(t *testing.T) {
-	idsSum, err := GetPossibleGames(input1)
+	idsSum, err := GetPossibleGameIdSums(input1)
 	if err != nil {
 		t.Errorf("Error: %v\n", err)
 	}
-	expected := 1 + 2 + 5
-	if idsSum != expected {
-		t.Errorf("Expected `%v`, got `%v`", expected, idsSum)
+	expectedIdsSum := 1 + 2 + 5
+	if idsSum != expectedIdsSum {
+		t.Errorf("Expected `%v`, got `%v`", expectedIdsSum, idsSum)
+	}
+
+	idsPower, err := GetPowerOfMinCubes(input1)
+	if err != nil {
+		t.Errorf("Error: %v\n", err)
+	}
+	expectedIdsPower := 2286
+	if idsPower != expectedIdsPower {
+		t.Errorf("Expected `%v`, got `%v`", expectedIdsPower, idsPower)
 	}
 }
 
