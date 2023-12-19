@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-const day1Input1 = `1abc2
+const input1 = `1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet`
 
-const day1Input2 = `two1nine
+const input2 = `two1nine
 eightwothree
 abcone2threexyz
 xtwone3four
@@ -21,21 +21,21 @@ zoneight234
 7pqrstsixteen`
 
 func TestGetCalibration(t *testing.T) {
-	sum, err := GetCalibrations(day1Input1)
+	sum, err := GetCalibrations(input1)
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
 	}
 	if sum != 142 {
 		t.Errorf("Expected 142, got %d", sum)
 	}
-	sum, err = GetCalibrationsScanner(day1Input1, ScanNumerals)
+	sum, err = GetCalibrationsScanner(input1, ScanNumerals)
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
 	}
 	if sum != 142 {
 		t.Errorf("Expected 142, got %d", sum)
 	}
-	sum, err = GetCalibrationsScanner(day1Input2, ScanNumeralsAndNumberWords)
+	sum, err = GetCalibrationsScanner(input2, ScanNumeralsAndNumberWords)
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
 	}

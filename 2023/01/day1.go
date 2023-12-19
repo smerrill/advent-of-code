@@ -7,6 +7,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	adventofcode "stevenwmerrill.com/adventofcode/2023/v2"
 )
 
 func GetCalibrationsWithWords(input string) (int, error) {
@@ -107,7 +109,7 @@ func GetCalibrations(input string) (int, error) {
 }
 
 func main() {
-	input, err := ReadFileIntoString("input1.txt")
+	input, err := adventofcode.ReadFileIntoString("input.txt")
 	if err != nil {
 		log.Fatalf("Error reading file: %v", err)
 	}
